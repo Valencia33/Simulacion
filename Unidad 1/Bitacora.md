@@ -82,3 +82,76 @@ let choice = floor(randomGaussian(0,3));
     }
 ```
 <img width="700" height="700" alt="image" src="https://github.com/user-attachments/assets/ebb46080-b11f-4ef9-b143-7e65e1f01755" />
+
+3.) otras cosas
+
+Hice que tuviera un wrap para que el patrón no se escapara
+
+```py
+// The Nature of Code
+// Daniel Shiffman
+// http://natureofcode.com
+
+let walker;
+
+function setup() {
+  createCanvas(700, 700);
+  walker = new Walker();
+  background(255);
+}
+
+function draw() {
+  walker.step();
+  walker.show();
+}
+
+class Walker {
+  constructor() {
+    this.x = width / 2;
+    this.y = height / 2;
+    this.hue = 0
+    this.r = 1;
+  }
+
+  show() {
+    stroke(this.hue, this.hue + this.hue, this.hue * 3);
+    circle(this.x,this.y,this.r)
+  }
+
+  step() {
+    let choice = floor(randomGaussian(0,3));
+    if(choice < 0)
+    {
+      choice = 0;
+    }
+    
+    this.hue++;
+    if(this.hue == 255)
+    {
+      this.hue = 0;
+    }
+
+    this.r++;
+    if(this.r == 25)
+    {
+      this.r = 0;
+    }
+    
+    if (choice == 0) {
+      this.x+=10;
+    } else if (choice == 1) {
+      this.x-=10;
+    } else if (choice == 2) {
+      this.y+=10;
+    } else {
+      this.y-=10;
+    }
+
+    if(this.x > width) this.x =0;
+    if(this.y > height) this.y = 0;
+    if (this.x < 0) this.x = width;
+    if(this.y < 0) this.y = height;
+  }
+}
+
+```
