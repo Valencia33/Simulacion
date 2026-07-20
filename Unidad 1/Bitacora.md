@@ -316,3 +316,68 @@ entonces mejor se calcula el movimiento así:
 ```
 
 <img width="1200" height="1200" alt="image" src="https://github.com/user-attachments/assets/fe2c5a64-d415-488b-b6b7-12f1d200ace8" />
+
+## Actividad 6
+
+Listo, la verdad es que no se me ocurrieron muchas más formas de visualizarlo más allá de lo que proponía el ejercicio, ENTONCES decidí hacer lo mismo pero más estilizado. En la esquina de arriba a la derecha se presentan dos valores; 1.) el valor que devuelve noise(t) y 2.) la diferencia de noise(t) en fn y fn+1, esto debido a que en esta visualización el color juega un papel crucial, y es que entre más rojo sea el color significa que el cambio entre valores fue más brusco.
+
+```py
+let t = 0
+let perlinValue
+let diference
+let frameValue = 0
+let c1
+let c2
+let diff
+let x = 500
+
+function setup() {
+  createCanvas(1000, 1000);
+
+  c1 = color(0,255,0)
+  c2 = color(255,0,0)
+}
+
+function draw() {
+  background(220,15);
+  
+  perlinValue = noise(t) // genera valor
+  diference = frameValue-perlinValue
+  if(abs(diference*100) > 1)
+  {
+    diff = 1
+  }  
+  else
+  {
+    diff = abs(diference*100)
+  }
+  fill(lerpColor(c1,c2,diff)) //calcula color dependiendo del cambio
+  noStroke()
+  frameValue = perlinValue // guarda pal siguiente frame
+  
+  circle(x,perlinValue*1000,50) //dibuja el circulo
+
+  //====== INCREMENTO VARIABLES=========
+  t += 0.01
+  x+=5
+
+  if(x>width) x = 0
+
+  //=====TEXTO============
+  fill(150)
+  square(30,30,200)
+  textSize(50)
+  fill(lerpColor(c1,c2,diff))
+  text(round(perlinValue,2),50,90)
+  fill(0)
+  text(round(diff,3),50,190)
+  
+}
+```
+
+<img width="1000" height="1000" alt="image" src="https://github.com/user-attachments/assets/0c2a4856-5cc6-4012-a1d7-07a57cca5318" />
+
+
+<img width="1000" height="1000" alt="image" src="https://github.com/user-attachments/assets/e39c2d11-bf50-438a-8e6b-00d60e8820ab" />
+
+hay si observa que entre mayor la diferencia entre frames entonces más rojo será el color.
