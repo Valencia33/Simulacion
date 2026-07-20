@@ -380,4 +380,67 @@ function draw() {
 
 <img width="1000" height="1000" alt="image" src="https://github.com/user-attachments/assets/e39c2d11-bf50-438a-8e6b-00d60e8820ab" />
 
-hay si observa que entre mayor la diferencia entre frames entonces más rojo será el color.
+ahí si observa que entre mayor la diferencia entre frames entonces más rojo será el color.
+
+## Actividad 7
+
+**El sistema deberá interpretar los siguientes momentos:**
+
+ - Posibilidad: todas las direcciones parecen posibles.
+ - Tendencia: una pequeña preferencia repetida termina construyendo una dirección.
+ - Normalidad: la mayoría de los recorridos permanece cerca de lo habitual.
+ - Excepción: un evento improbable permite descubrir un territorio nuevo.
+ - Influencia: la presencia del visitante transforma lo que puede ocurrir.
+   
+No debes ilustrar literalmente las frases. Debes traducirlas en comportamientos, trayectorias, ritmos, concentraciones o transformaciones.
+
+**Condiciones de diseño**
+
+  - La experiencia debe ser una sola pieza coherente, no cinco sketches separados.
+  - Debe combinar significativamente al menos tres conceptos de la unidad: caminata aleatoria, distribuciones de probabilidad, distribución normal, Lévy flight o ruido Perlin.
+  - La interacción debe modificar las probabilidades o reglas del sistema. No basta con cambiar colores, avanzar escenas o dibujar directamente.
+  - El sistema debe continuar funcionando cuando nadie interactúa.
+  - Cada ejecución debe producir variaciones sin perder su identidad visual.
+  - Formato 9:16, full screen y ejecución interactiva en tiempo real.
+
+### Reto de diseño
+
+1.) Posibilidad
+
+Para este momento, desde su descripción se me ocurre que lo más obvio sería utilizar la distribución NO UNIFORME, me hace sentir que como todos los caminos son posibles entonces todo puede pasar. No solo eso pero tambien me gustaría la opción de que el usuario pueda borrar el tablero, entonces antes de empezar, eso es lo primero que haré.
+
+Me tomó más de lo que me gustaría admitir, pq lo estaba haciendo en un método aparte y la lógica estaba detrás de un while, por lo que no dibujaba en la pantalla si no que lo hacia INSTANTANEo, entonces puse un if en draw().
+```py
+//=== BORRAR PANTALLA ===
+  if (eraseScreen && radii < width + 500) {
+    fill(0);
+    noStroke();
+    circle(width/2, height/2, radii);
+    
+    radii += 50;
+  }
+```
+Lo mejoré un poquitin para que fuera más claro que borra, encima no solo eso pero tambien se me olvidó que tenía que reiniciar las variables para volver a borrar
+
+```py
+if (eraseScreen) {
+    fill(255);
+    noStroke();
+    circle(width/2, height/2, radii+15);
+    fill(0)
+    circle(width/2, height/2, radii);
+    radii += 100;
+
+    if (radii > width + 500) {
+      eraseScreen = false;
+    }
+  }
+}
+
+function keyPressed() {
+  if (key === 'e') {
+    radii = 0;
+    eraseScreen = true;
+  }
+}
+```
