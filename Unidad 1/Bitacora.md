@@ -221,4 +221,98 @@ function draw() {
 }
 
 ```
+## Actividad 5
 
+Si utilizamos partes del código presentado por Daniel Shiffman podemos lograr simular un levy flight, sin embargo no lo es del todo pues según tengo entendido la probabilidad de cualquier longitud de salto EXISTE, pero disminuye a medida que el tamaño de salto aumenta. Dicho esto, en un principio hice exactamente eso:
+
+```py
+let walker;
+
+function setup() {
+  createCanvas(700, 700);
+  walker = new Walker();
+  background(0);
+}
+
+function draw() {
+  walker.step();
+  walker.show();
+}
+
+class Walker {
+  constructor() {
+    this.x = width / 2;
+    this.y = height / 2;
+    this.hue = 0
+    this.r = 1;
+  }
+
+  show() {
+    stroke(this.hue, this.hue + this.hue, this.hue * 3);
+    fill(0)
+    circle(this.x,this.y,this.r)
+  }
+
+  step() {
+    
+    let choice = floor(random(4));
+
+    //cambio color
+    this.hue++;
+    if(this.hue == 255)
+    {
+      this.hue = 0;
+    }
+
+    //cambio radio
+    this.r++;
+    if(this.r == 25)
+    {
+      this.r = 0;
+    }
+
+    //implementación levy flight
+    let r = random(1);
+    if (r < 0.02)
+    {
+      let step = 300;
+    let stepx = random(-step, step);
+    let stepy = random(-step, step);
+    this.x += stepx;
+    this.y += stepy;
+    }
+    
+
+    //pasos "normales"
+    if (choice == 0) {
+      this.x+=10;
+    } else if (choice == 1) {
+      this.x-=10;
+    } else if (choice == 2) {
+      this.y+=10;
+    } else {
+      this.y-=10;
+    }
+
+    if(this.x > width) this.x =0;
+    if(this.y > height) this.y = 0;
+    if (this.x < 0) this.x = width;
+    if(this.y < 0) this.y = height;
+  }
+}
+```
+<img width="1200" height="1200" alt="image" src="https://github.com/user-attachments/assets/2dfec277-0e4e-4633-b8c1-aad1d9c997a9" />
+
+Ahora bien, ese código simula bastante bien como se vería un Levy flight real, pero para hacerlo REAL debemos quitar la linea de let random(1) y el if, y en vez utilizar el random para calcular la distancia del salto, de esta forma la probabilidad está directamente relacionada con la distancia del salto.
+
+entonces mejor se calcula el movimiento así:
+
+```py
+  let step = 5/(random(1)**2)
+    let stepx = random(-step, step);
+    let stepy = random(-step, step);
+    this.x += stepx;
+    this.y += stepy;
+```
+
+<img width="1200" height="1200" alt="image" src="https://github.com/user-attachments/assets/fe2c5a64-d415-488b-b6b7-12f1d200ace8" />
