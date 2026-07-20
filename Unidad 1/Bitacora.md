@@ -3,6 +3,8 @@
 
 Despues de observar los videos y leer los ensayos de Tyler Hobbs comprendo que el concepto de *Aletoriedad* en el arte es para que el producto final sea distinto cada vez que se iter.
 
+## Actividad 2
+
 ```py
 // The Nature of Code
 // Daniel Shiffman
@@ -64,13 +66,15 @@ class Walker {
 
 <img width="700" height="700" alt="image" src="https://github.com/user-attachments/assets/5d20de4f-e826-43d3-b624-f4715433e39e" />
 
+Al analizar el código entendí rapidamente donde debía de realizar cambios para lograr el resultado que esperaba, en un principio sabía que quería que se viera como una serpiente dando vueltas, no sería posible hacerlo en realidad a menos de que guardará los datos de cada circulo y los actualizara frame a frame entonces opté por una solución más simple que fue no hacerlo y usar un contador que iba de 0 a 25, aumentar el "salto" que se daba entre circulos y tambien cambiar el color.
+
 ## Actividad 3
 
-1.) En tus propias palabras cuál es la diferencia entre una distribución uniforme y una no uniforme de números aleatorios.
+1.) **En tus propias palabras cuál es la diferencia entre una distribución uniforme y una no uniforme de números aleatorios.**
 
 Una distribución uniforme tiene la misma probabilidad de generar todos los números en un rango. Una distribución no uniforme tiene mayor probabilidad en algunos valores, en el caso de la distribución gaussiana, este tiene mayor probabilidad de generar los valores que están cerca de la media.
 
-2.) Modificar el código para que tenga mayor probabilidad de moverse a la derecha.
+2.) **Modificar el código para que tenga mayor probabilidad de moverse a la derecha.**
 
 Lo que hice fue utilizar randomGaussian() para que la probabilidad de generar valores cercanos a 0 sea mayor
 
@@ -83,7 +87,7 @@ let choice = floor(randomGaussian(0,3));
 ```
 <img width="700" height="700" alt="image" src="https://github.com/user-attachments/assets/ebb46080-b11f-4ef9-b143-7e65e1f01755" />
 
-3.) otras cosas
+3.) **otras cosas**
 
 Hice que tuviera un wrap para que el patrón no se escapara
 
@@ -156,6 +160,8 @@ class Walker {
 
 ```
 ## Actividad 4
+
+1.) **Crea un nuevo sketch en p5.js que represente una distribución normal, pero visualizándola de manera diferente a la del ejemplo.**
 
 El código del ejercicio:
 
