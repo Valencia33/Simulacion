@@ -159,7 +159,7 @@ class Walker {
 
 El código del ejercicio:
 
-```
+```py
 // The Nature of Code
 // Daniel Shiffman
 // http://natureofcode.com
@@ -181,3 +181,38 @@ function draw() {
 Este código es bastante simple, utiliza el número que le devuelve la distribución gaussiana para mover un circulo bastante tenue en x.
 
 Para la modificación que le quiero hacer voy a hacer lo mismo, pero cambiando el tamaño de tal forma que en width/2 sea lo más grande y a medida que va a los extremos se vuelva más pequeño. No solo eso si no que tambien voy a modificar el color, para que verde sea cuando está en el centro y rojo en los extremos e interpole entre esos.
+
+<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/253d4232-3bd0-430f-b22e-3fbbd3ebec89" />
+
+Lo logré, lo hice todo sin ayuda de la IA excepto el segundo lerpColor donde usando el método del profe de discutir con la IA me di cuenta que era solamente que tenia c1 y c2 trucados. No solo eso pero me dio una solución mejor al tema del color y era calcularlo con distancia en vez de con rangos, que me pareció una excelente idea pero al final no la implementé
+
+```py
+function setup() {
+  createCanvas(600, 600);
+  background(255);
+}
+
+function draw() {
+  let c1 = color(0,255,0,40);
+  let c2 = color(255,0,0,40);
+  let x = randomGaussian(300, 100);
+  
+  let size = x;
+
+  if(size > 300)
+  {
+    size = 300 - (x-300);
+    finalColor =  lerpColor(c2,c1,1 + (size-300)/(300));
+  }
+  else
+  {
+    finalColor = lerpColor(c2,c1,(size)/(300));
+  }
+  
+  noStroke();
+  fill(finalColor);
+  circle(x, 300, size);
+}
+
+```
+
