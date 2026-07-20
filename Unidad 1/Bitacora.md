@@ -155,3 +155,29 @@ class Walker {
 }
 
 ```
+## Actividad 4
+
+El código del ejercicio:
+
+```
+// The Nature of Code
+// Daniel Shiffman
+// http://natureofcode.com
+
+function setup() {
+  createCanvas(640, 240);
+  background(255);
+}
+
+function draw() {
+  // A normal distribution with mean 320 and standard deviation 60
+  let x = randomGaussian(320, 60);
+  noStroke();
+  fill(0, 10);
+  circle(x, 120, 16);
+}
+```
+
+Este código es bastante simple, utiliza el número que le devuelve la distribución gaussiana para mover un circulo bastante tenue en x.
+
+Para la modificación que le quiero hacer voy a hacer lo mismo, pero cambiando el tamaño de tal forma que en width/2 sea lo más grande y a medida que va a los extremos se vuelva más pequeño. No solo eso si no que tambien voy a modificar el color, para que verde sea cuando está en el centro y rojo en los extremos e interpole entre esos.
