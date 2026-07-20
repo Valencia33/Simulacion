@@ -444,3 +444,114 @@ function keyPressed() {
   }
 }
 ```
+BUENO AHORA Sí, la parte de POSIBILIDAD y la verdad del resto de propuestas, como estoy partiendo de los ejercicios que salieron de la parte del walker entonces realmente no hay mucho que decir aparte de las cosas que ya implemneté en ejercicios pasados, entonces voy a colocar acá los códigos y mencionó cualauqier cambio que haya hecho.
+
+en un principio, cada uno de los comportamientos decidí meterlos a métodos de cada uno y controlarlos como si fuera una maquina de estados que maneja el usuario.
+
+```py
+ tendencia(){
+    //pasos "normales" - TENDENCIA
+    let choice = floor(random(8));
+
+    if (choice == 0) {
+      this.x+=15;
+    } else if (choice == 1) {
+      this.x-=15;
+    } else if (choice == 2) {
+      this.y+=15;
+    } else {
+      this.y-=15;
+    }
+  }
+  
+  normalidad(){
+    let perlinValue = noise(this.t)
+
+    //====== INCREMENTO VARIABLES=========
+    this.t += 0.01
+    this.x+=5
+    this.y = perlinValue*1000
+  }
+  
+  posibilidad(){
+    //pasos "normales" - POSIBILIDAD
+    let choice = floor(random(4));
+
+    if (choice == 0) {
+      this.x+=15;
+    } else if (choice == 1) {
+      this.x-=15;
+    } else if (choice == 2) {
+      this.y+=15;
+    } else {
+      this.y-=15;
+    }
+  }
+
+  excepcion(){
+     //implementación levy flight - EXCEPCIÓN
+    let r = random(1);
+    if (r < 0.02)
+    {
+      let step = 300;
+    let stepx = random(-step, step);
+    let stepy = random(-step, step);
+    this.x += stepx;
+    this.y += stepy;
+    }
+  }
+```
+esta es la primera versión, aún está muy sujeta a cambios puesto que literalmente pegué e hice cambios muy pequeños para adaptarlo, pero en si es lo mimso que ya hicimos, con la excepción de que TENDENCIA es el mimso de posibilidad pero se crean números random mayores a 4 por lo que y -= 15 es mucho más probable de suceder.
+
+Ahora lo que sigue es añadir un par de interacciones para el usuario.
+
+ok hubo un par de cambios precisamente por eso de que quería meter más interacciones pal usuairo, una de sas fue que pudiera colocar más walkers, el tema es que eso hizo que tuviera que cambiar de un solo objeto a un array y que cada que llamara sus coasa en draw() fuera con un for
+
+```py
+function mousePressed() {
+  let nuevoWalker = new Walker();
+  nuevoWalker.x = mouseX;
+  nuevoWalker.y = mouseY;
+  
+  if (walkers.length > 0) {
+    nuevoWalker.modo = walkers[0].modo;
+  }
+  
+  walkers.push(nuevoWalker);
+}
+```
+esto es para cambiar de modos.
+```py
+function keyPressed() {
+  if (key === 'e') {
+    radii = 0;
+    eraseScreen = true;
+  }
+  else if(keyCode === 39) {
+    for (let w of walkers) {
+      w.modo++;
+      if (w.modo > 4) w.modo = 1;
+    }
+  }
+  else if(keyCode === 37) {
+    for (let w of walkers) {
+      w.modo--;
+      if (w.modo < 1) w.modo = 4;
+    }
+  }
+}
+```
+y ahora este es mi método step()
+```
+step() {
+    if (this.modo === 1) this.posibilidad();
+    else if (this.modo === 2) this.tendencia();
+    else if (this.modo === 3) this.normalidad();
+    else if (this.modo === 4) this.excepcion();
+
+    if(this.x > width) this.x = 0;
+    if(this.y > height) this.y = 0;
+    if(this.x < 0) this.x = width;
+    if(this.y < 0) this.y = height;
+  }
+```
