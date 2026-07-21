@@ -555,3 +555,38 @@ step() {
     if(this.y < 0) this.y = height;
   }
 ```
+He hecho vairas cosas, la posibilidad de añadir mas bichitos me ha dado más problemas, pues quise hacer que al crear uno nuevo este tuviera un color distinto, entonces añadí esa interacción. Al final mi solución fue pasarle el tipo de color con el que se crea y mantener un contador por lo que haora mi metodo cuando se presiona el mouse se ve así: 
+
+```
+function mousePressed() {
+  let nuevoWalker = new Walker(turnoColor);
+  nuevoWalker.x = mouseX;
+  nuevoWalker.y = mouseY;
+  
+  walkers.push(nuevoWalker);
+  
+  turnoColor++;
+  if (turnoColor > 3) {
+    turnoColor = 0;
+  }
+}
+```
+Con eso ya tengo lo principal de la appplicacion, pero falta LO MÁS DIFICIL 
+que es la interacción del usuario, para esto planeaba hacer algo con la posición del mouse, ah buneo eso y que se me olvidó que la resolución en realidad es vertical.
+
+Quiero hacer como una especie de atractor, que aprovechando que estoy haciendo eso con objetos debería ser bastante facil si lo hago en el step(), para eso entonces, como igual quiero que sigan siendo aleatorios los movimientos entonces voy a hacer que el mouse afecte los cocsitos que están a determinado radio de el, en pseudo codigo sería algo como
+
+sacar distancia de cosito a mouse
+chequear si la distnacia es menor que x
+si si lo es entonces 
+x lerp a la posición del mouse
+y lerp a la posición del mouse
+
+```
+let distanciaMouse = dist(this.x, this.y, mouseX, mouseY);
+    
+    if (distanciaMouse < 300) {
+        this.x += (mouseX - this.x) * 0.15; 
+        this.y += (mouseY - this.y) * 0.15;
+      }
+```
