@@ -620,4 +620,210 @@ Lo logré de una forma más elegante, utilicé un IF que encierra el bloque ante
 ===================================================================================================================================
 ===================================================================================================================================
 
-Hasta ahora he tenido en cuenta una forma muy básica de mi concepto, en
+Hasta ahora he tenido en cuenta una forma muy básica de mi concepto. El punto actual del proyecto es centrarse más que todo en COMO CRECE LA NATURALEZA, más sin embargo está creciendo independiente de SI MISMA y la interacción humana afecta MÁS NO DESTRUYE y no vuelve a su orden, este es el estado actual del proyecto:
+
+<img width="1080" height="1920" alt="image" src="https://github.com/user-attachments/assets/431b76a8-45c6-496d-aadc-51f0b757595d" />
+
+```js
+let walkers = [];
+let radii = 0;
+let eraseScreen = false;
+let turnoColor = 0;
+let opacity = 255;
+
+function setup() {
+  createCanvas(1080, 1920);
+  walkers.push(new Walker(turnoColor));
+  turnoColor++;
+  background(0);
+}
+
+function draw() {
+
+  //====== WALKER ======
+  for (let i = 0; i < walkers.length; i++) {
+    walkers[i].step();
+    walkers[i].show();
+  }
+
+  //== INSTRUCCIONES ==
+  if(opacity != 0)
+  {
+   fill(opacity)
+  noStroke()
+  rect(20,20,280,110,20)
+  fill(0)
+  textSize(20)
+  text("+ click - crear walker" , 40,50)
+  text("+ flechitas - cambiar modo" , 40,80)
+  text("+ E - borrar" , 40,110)
+  opacity -= 1
+  if(opacity < 0) opacity = 0 
+  }
+
+  //=== BORRAR PANTALLA ===
+  if (eraseScreen) {
+    fill(255);
+    noStroke();
+    circle(width/2, height/2, radii+15);
+    fill(0);
+    circle(width/2, height/2, radii);
+    radii += 100;
+
+    if (radii > width + 1500) {
+      eraseScreen = false;
+    }
+  }
+}
+
+class Walker {
+  constructor(tipoColor) {
+    this.x = random(width);
+    this.y = random(height);
+    this.hue = 0; 
+    this.tipoColor = tipoColor; 
+    this.r = random(25);
+    this.t = random(10000);
+    this.modo = floor(random(1, 5));
+  }
+
+  show() {
+
+    strokeWeight(15)
+      
+    if (this.tipoColor === 0) {
+      stroke(this.hue, this.hue + this.hue, this.hue * 3); 
+    } else if (this.tipoColor === 1) {
+      stroke(this.hue * 3, this.hue + this.hue, this.hue); 
+    } else if (this.tipoColor === 2) {
+      stroke(this.hue, this.hue * 3, this.hue + this.hue); 
+    } else if (this.tipoColor === 3) {
+      stroke(this.hue * 3, this.hue, this.hue+this.hue); 
+    }
+
+    fill(0);
+    circle(this.x, this.y, this.r);
+    
+    //cambio color
+    this.hue++;
+    if(this.hue >= 85) {
+      this.hue = 0;
+    }
+
+    //cambio radio
+    this.r++;
+    if(this.r >= 25) {
+      this.r = 0;
+    }
+  }
+
+  step() {
+    if (this.modo === 1) this.posibilidad();
+    else if (this.modo === 2) this.tendencia();
+    else if (this.modo === 3) this.normalidad();
+    else if (this.modo === 4) this.excepcion();
+
+    /*
+    let distanciaMouse = dist(this.x, this.y, mouseX, mouseY);
+    
+    if (distanciaMouse < 300) {
+        this.x += (mouseX - this.x) * 0.15; 
+        this.y += (mouseY - this.y) * 0.15;
+      }
+    */
+
+    if(this.x > width) this.x = 0;
+    if(this.y > height) this.y = 0;
+    if(this.x < 0) this.x = width;
+    if(this.y < 0) this.y = height;
+  }
+
+  tendencia() {
+    //pasos "normales" - POSIBILIDAD
+    let choice = floor(random(8));
+
+    if (choice == 0) {
+      this.x+=15;
+    } else if (choice == 1) {
+      this.x-=15;
+    } else if (choice == 2) {
+      this.y+=15;
+    } else {
+      this.y-=15;
+    }
+  }
+  
+  normalidad() {
+    let perlinValue = noise(this.t);
+
+    //====== INCREMENTO VARIABLES=========
+    this.t += 0.01;
+    this.x += 15;
+    this.y = perlinValue * 1500;
+  }
+  
+  posibilidad() {
+    //pasos "normales" - POSIBILIDAD
+    let choice = floor(random(4));
+
+    if (choice == 0) {
+      this.x+=15;
+    } else if (choice == 1) {
+      this.x-=15;
+    } else if (choice == 2) {
+      this.y+=15;
+    } else {
+      this.y-=15;
+    }
+  }
+
+  excepcion() {
+    //implementación levy flight - EXCEPCIÓN
+    let r = random(1);
+    if (r < 0.02) {
+      let step = 300;
+      let stepx = random(-step, step);
+      let stepy = random(-step, step);
+      this.x += stepx;
+      this.y += stepy;
+    } else {
+      this.x += random(-10, 10);
+      this.y += random(-10, 10);
+    }
+  }
+}
+
+function keyPressed() {
+  if (key === 'e') {
+    radii = 0;
+    eraseScreen = true;
+    walkers = [];
+  }
+  else if(keyCode === 39) {
+    for (let w of walkers) {
+      w.modo++;
+      if (w.modo > 4) w.modo = 1;
+    }
+  }
+  else if(keyCode === 37) {
+    for (let w of walkers) {
+      w.modo--;
+      if (w.modo < 1) w.modo = 4;
+    }
+  }
+}
+
+function mousePressed() {
+  let nuevoWalker = new Walker(turnoColor);
+  nuevoWalker.x = mouseX;
+  nuevoWalker.y = mouseY;
+  
+  walkers.push(nuevoWalker);
+  
+  turnoColor++;
+  if (turnoColor > 3) {
+    turnoColor = 0;
+  }
+}
+```
+
