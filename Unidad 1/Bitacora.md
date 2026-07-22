@@ -826,4 +826,11 @@ function mousePressed() {
   }
 }
 ```
+Es por eso, que a partir de ahora, tomaré una lista de ideas para implementar QUE ADEMÁS COMPLEMENTEN el concepto:
 
+1.) Los walker se afectan entre ellos, como si fueran planetas.
+2.) La interacción del usuario CAMBIA PROBABILIDADES de los walker que no estén en el radio de acción Y ADEMÁS cambia de color los walker a un GRIS.
+3.) Una vez el usuario interactua, un bloque negro crece en opacidad lentamente para dar a entender que el efecto humano se borra con el tiempo.
+4.) Que la experiencia comience con una exploción.
+5.) Que cada uno de los colores esté asociado a un comportamiento y una parte de la naturaleza: Azul (agua, ruido perlin), Verde (Plantas, distribución no uniforme), Rojo (Corales, Distribución gaussiana (que crezcan hacía arriba y  tengan la habilidad de multiplicarse)), Amarillo (Vida, Levy Flight). La interacción del humano, me gustaría que hiciera las cosas grises.
+6.) Las relaciones entre los walker DEPENDE DE SUS TIPOS. CORALES Y AGUA SE ATRAEN, AGUA Y PLANTAS SE REPELEN, PLANTAS Y VIDA SE ATRAEN Y SE REPELEN.
