@@ -405,6 +405,11 @@ No debes ilustrar literalmente las frases. Debes traducirlas en comportamientos,
 
 ### Reto de diseño
 
+**CONCEPTO**
+Ultimamente, me preocupa mucho la dirección que tome la humanidad con respecto al medio ambiente, me parece que por muchos años hemos crecido sin preguntarnos como nuestros hábitos de consumo afectan el medio ambiente. La naturaleza, como un todo, es algo infinitamente complejo, con infinidad de variables, que sin la presencia de humanos se transforma y crece a partir de reglas impuestas desde un principio. Sin embargo, la presencia de la humanidad, ha desviado los procesos usuales de la naturaleza y la ha afectado de tal manera que volver a la normalidad tomará una escala de tiempo inconcebible para nosotros.
+
+Es por eso, que en mi experiencia pretendo darle importancia a ese concepto: Como la intervención humana afecta de forma indefinida un ecosistema.
+
 1.) Posibilidad
 
 Para este momento, desde su descripción se me ocurre que lo más obvio sería utilizar la distribución NO UNIFORME, me hace sentir que como todos los caminos son posibles entonces todo puede pasar. No solo eso pero tambien me gustaría la opción de que el usuario pueda borrar el tablero, entonces antes de empezar, eso es lo primero que haré.
@@ -503,6 +508,8 @@ en un principio, cada uno de los comportamientos decidí meterlos a métodos de 
 ```
 esta es la primera versión, aún está muy sujeta a cambios puesto que literalmente pegué e hice cambios muy pequeños para adaptarlo, pero en si es lo mimso que ya hicimos, con la excepción de que TENDENCIA es el mimso de posibilidad pero se crean números random mayores a 4 por lo que y -= 15 es mucho más probable de suceder.
 
+Dos complicaciones en esta etapa de diseño; Una forma de que el usuario sepa que controles hay/como puede influir y un concepto. La primera complicación es mucho más simple de resolver que la otra, mi solución fue un 
+
 Ahora lo que sigue es añadir un par de interacciones para el usuario.
 
 ok hubo un par de cambios precisamente por eso de que quería meter más interacciones pal usuairo, una de sas fue que pudiera colocar más walkers, el tema es que eso hizo que tuviera que cambiar de un solo objeto a un array y que cada que llamara sus coasa en draw() fuera con un for
@@ -590,3 +597,27 @@ let distanciaMouse = dist(this.x, this.y, mouseX, mouseY);
         this.y += (mouseY - this.y) * 0.15;
       }
 ```
+Tengo una complicacion, la primera es que el usuario aún no sabe que controles tiene la experiencia por lo que vamos a solucionar eso. La solución al primer problema es bastante simple, un cuadrado con las instrucciones, y como estorba, bajarle la opacidad graudalmente 
+
+```py
+
+  //== INSTRUCCIONES ==
+  fill(255,opacity)
+  noStroke()
+  rect(20,20,280,110,20)
+  fill(0,opacity)
+  textSize(20)
+  text("+ click - crear walker" , 40,50)
+  text("+ flechitas - cambiar modo" , 40,80)
+  text("+ E - borrar" , 40,110)
+  opacity -= 1
+  if(opacity < 0) opacity = 0
+```
+no es tan simple. por alguna razón que desconozco mi lógica no funciona. Es muy charro pq se supone que fill(gray,alpha) entonces si disminuyo opacity hasta que sea 0 se debería dejar de ver, cosa que no pasa por alguna razón, sin embargo si cambio los valores alcanzo un resultado similar, por lo que voy a optar por dibujar las instrucciones despues del walker para que de esa forma pareza que logra el mismo resultado, y no haya un cuadrado negro ahí de la nada. 
+
+Lo logré de una forma más elegante, utilicé un IF que encierra el bloque anterior, por lo que de esa forma, en el siguiente frame en el que opacity ya sea 0, no va a correr y va a dibujar encima del cuadrado negro.
+
+===================================================================================================================================
+===================================================================================================================================
+
+Hasta ahora he tenido en cuenta una forma muy básica de mi concepto, en
