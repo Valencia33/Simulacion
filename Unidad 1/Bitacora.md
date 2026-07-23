@@ -1299,4 +1299,4 @@ tendencia() {
 | **Simulación con intención:** utilizo al menos tres conceptos de la unidad para comunicar las ideas del encargo. | X | | [evidencia 2](#e2) [evidencia 3](#e3)|
 | **Interacción significativa:** la interacción modifica el comportamiento o las probabilidades del sistema, que también funciona sin intervención. | X | |[evidencia 4](#e4)|
 | **Prototipo funcional:** la experiencia puede ejecutarse y recorrerse completa sin errores que impidan comprenderla. | X | | [evidencia 5](https://editor.p5js.org/Valencia33/sketches/Q9D_vwB8Z)|
-| **Proceso documentado:** la bitácora evidencia avances, decisiones, dificultades, soluciones, uso de IA y enlace al prototipo. | X | | [evidencia 6](#e6)|
+| **Proceso documentado:** la bitácora evidencia avances, decisiones, dificultades, soluciones, uso de IA y enlace al prototipo. | X | | [evidencia 6](https://github.com/Valencia33/Simulacion/blob/main/Unidad%201/Bitacora.md)|
