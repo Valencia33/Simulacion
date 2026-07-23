@@ -418,7 +418,7 @@ Es por eso, que en mi experiencia pretendo darle importancia a ese concepto: Com
  - Influencia: Como en la vida real, la presencia del ser humano hace que el ecosistema pierda el equilibrio, muera, sea afectado profundamente, tan profundamente que se demora mucho tiempo en recuperarse
 
 1.) Posibilidad
-
+<a name="e2"></a>
 Para este momento, desde su descripción se me ocurre que lo más obvio sería utilizar la distribución NO UNIFORME, me hace sentir que como todos los caminos son posibles entonces todo puede pasar. No solo eso pero tambien me gustaría la opción de que el usuario pueda borrar el tablero, entonces antes de empezar, eso es lo primero que haré.
 
 Me tomó más de lo que me gustaría admitir, pq lo estaba haciendo en un método aparte y la lógica estaba detrás de un while, por lo que no dibujaba en la pantalla si no que lo hacia INSTANTANEo, entonces puse un if en draw().
@@ -459,6 +459,8 @@ function keyPressed() {
 BUENO AHORA Sí, la parte de POSIBILIDAD y la verdad del resto de propuestas, como estoy partiendo de los ejercicios que salieron de la parte del walker entonces realmente no hay mucho que decir aparte de las cosas que ya implemneté en ejercicios pasados, entonces voy a colocar acá los códigos y mencionó cualauqier cambio que haya hecho.
 
 en un principio, cada uno de los comportamientos decidí meterlos a métodos de cada uno y controlarlos como si fuera una maquina de estados que maneja el usuario.
+
+<a name="e3"></a>
 
 ```py
  tendencia(){
@@ -1200,6 +1202,8 @@ function mousePressed() {
 ```
 Ahora le pediré a una IA que ponga la palabra reservada donde necesita. Una vez hecho eso, ya funciona de maravilla, y ya puedo dibujar cosas SIN RASTRO, lo cual hubiese sido excelente para la parte de opacidad de las instrucciones... no lo había pensado. MI LOGICA SI ERA CORRECTA SOLO QUEAJ lfka kjhfk JHGFkj hgajkhfgaygfafhjbgaghjkghjkhjgakfhjgaghjksghjkagfhgkGKgkafgakghfghj VOY A CHILLAR.
 
+<a name="e4"></a>
+
 Ahora falta la parte importante de afectar probabilidades cuando EL USUARIO está presente, no me gusta lo que propuso la IA entonces voy a hacer un if que si mousex y mouse son 0 o están por fuera de la pantlla entonces no hace nada.
 
 Para lograr eso lo que hice fue poner en cada uno de los comportamientos un if que solo deja pasar si el mouse está en la pantalla, a partir de esto, en cada uno de los comportamientos creé variables que son inicializadas con un valor pero si se cumple que el mouse está dentro de la pantalla entonces las cambia para que el movimiento sea más errático.
@@ -1292,7 +1296,7 @@ tendencia() {
 | Criterio | Cumplo | No cumplo | Evidencia |
 | :--- | :---: | :---: | :--- |
 | **Encargo completo:** interpreto los cinco momentos dentro de un mismo sistema visual. | X | | [evidencia 1](#e1)|
-| **Simulación con intención:** utilizo al menos tres conceptos de la unidad para comunicar las ideas del encargo. | X | | [evidencia 2](#e2)|
-| **Interacción significativa:** la interacción modifica el comportamiento o las probabilidades del sistema, que también funciona sin intervención. | X | |[evidencia 3](#e3)|
-| **Prototipo funcional:** la experiencia puede ejecutarse y recorrerse completa sin errores que impidan comprenderla. | X | | [evidencia 4](#e4)|
-| **Proceso documentado:** la bitácora evidencia avances, decisiones, dificultades, soluciones, uso de IA y enlace al prototipo. | X | | [evidencia 5](#e5)|
+| **Simulación con intención:** utilizo al menos tres conceptos de la unidad para comunicar las ideas del encargo. | X | | [evidencia 2](#e2) [evidencia 3](#e3)|
+| **Interacción significativa:** la interacción modifica el comportamiento o las probabilidades del sistema, que también funciona sin intervención. | X | |[evidencia 4](#e4)|
+| **Prototipo funcional:** la experiencia puede ejecutarse y recorrerse completa sin errores que impidan comprenderla. | X | | [evidencia 5](https://editor.p5js.org/Valencia33/sketches/Q9D_vwB8Z)|
+| **Proceso documentado:** la bitácora evidencia avances, decisiones, dificultades, soluciones, uso de IA y enlace al prototipo. | X | | [evidencia 6](#e6)|
