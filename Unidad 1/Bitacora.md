@@ -871,7 +871,330 @@ if (d > 0 && d < radioPercepcion) {
           }
         }
 ```
-De esta forma ya los walker se afectan entre si.
+De esta forma ya los walker se afectan entre si. LA INTERACCIÓN ES MUY SIMPLE, entonces está sujeta a cambios, pero por ahora mi segundo punto.
 
-#### PAUSA DE ARREGLAR COSAS QUE ME MOLESTAN
+2.) La interacción del usuario CAMBIA PROBABILIDADES de los walker que no estén en el radio de acción Y ADEMÁS cambia de color los walker a un GRIS.
+
+Este es bastante simple, es añadir otro estado para los walker, que se active SI ESTÁN DENTRO DEL RADIO DE ACCIÓN DEL MOUSE. entonces en el metodo step lo primero sería lo mismo, calcular la distancia y poner un if, despues poner que mode = 0 y en la parte donde se define su comportamiento por su modo añadir el método.
+
+```
+let distanciaMouse = dist(this.x, this.y, mouseX, mouseY);
+    
+    if (distanciaMouse < 150 && (movedX !== 0 || movedY !== 0)) {
+      if (this.modo !== 0) {
+        this.modoOriginal = this.modo;
+        this.modo = 0;
+      }
+      this.tiempoCorrupcion = millis(); 
+    }
+```
+Método muerte
+
+```
+ muerte()
+  {
+
+    this.x += random(-5, 5);
+    this.y += random(-5, 5);
+
+    if (millis() - this.tiempoCorrupcion > this.tiempoRecuperacion) {
+      this.modo = this.modoOriginal;
+      this.r = 5; 
+    }
+  }
+```
+
+Cuando el mouse interactua con alguno en ese radio entonces se muere y revive despues de un rato.
+
+buscnado he perdido mucho tiempo tratando de solucionar un problema y ya encontré algo interesante que no sabía que existia en p5js. Hay una función llamada createGraphics, que permite dibujar en un buffer distinto al que hemos estado utilizando hasta el momento. la solución que proponen es crear una especia de CAPA NUEVA con las misma resolución y dibujar en ella todo lo que necesito. ESTE ES UN CAMBIO GRANDE. entonces voy a guardar mi código acá, antes de hacer un daño.
+
+```
+let walkers = [];
+let radii = 0;
+let eraseScreen = false;
+let modo = 1;
+let opacity = 255;
+
+function setup() {
+  createCanvas(1080, 1920);
+  walkers.push(new Walker(modo));
+  modo++;
+  background(0);
+
+  for(let i = 0; i < 20; i++){
+    walkers.push(new Walker(floor(random(1, 5))));
+  }
+}
+
+function draw() {
+
+  //====== WALKER ======
+  for (let i = 0; i < walkers.length; i++) {
+    walkers[i].interactuar(walkers);
+    walkers[i].step();
+    walkers[i].show();
+  }
+
+  //== INSTRUCCIONES ==
+  if(opacity != 0)
+  {
+   fill(opacity)
+  noStroke()
+  rect(20,20,250,80,20)
+  fill(0)
+  textSize(20)
+  text("+ click - crear walker" , 40,50)
+  text("+ E - borrar" , 40,80)
+  opacity -= 1
+  if(opacity < 0) opacity = 0 
+  }
+
+  //=== BORRAR PANTALLA ===
+  if (eraseScreen) {
+    fill(255);
+    noStroke();
+    circle(width/2, height/2, radii+15);
+    fill(0);
+    circle(width/2, height/2, radii);
+    radii += 100;
+
+    if (radii > width + 1500) {
+      eraseScreen = false;
+    }
+  }
+
+  //=== COSITO PAL MOUSE ===
+  fill(0)
+  strokeWeight(1)
+  stroke(255)
+  circle(mouseX,mouseY,150)
+
+}
+
+class Walker {
+  constructor(modo) {
+    this.x = random(width);
+
+    this.modo = modo;
+    this.modoOriginal = modo;
+    this.tiempoCorrupcion = 0;
+    this.tiempoRecuperacion = random(5000, 10000);
+    
+    if (this.modo === 2) {
+      this.y = random(1000,height); 
+    } else {
+      this.y = random(height);
+    }
+    
+    this.hue = 0; 
+    this.r = random(25);
+    this.t = random(10000);
+  }
+
+  show() {
+
+    strokeWeight(15)
+      
+    if (this.modo === 2) {
+      stroke(this.hue, this.hue + this.hue, this.hue * 3); //azul - agua
+    } else if (this.modo === 4) {
+      stroke(this.hue * 3, this.hue + this.hue, this.hue); //amarillo - vida
+    } else if (this.modo === 1) {
+      stroke(this.hue, this.hue * 3, this.hue + this.hue); //verde - plantas
+    } else if (this.modo === 3) {
+      stroke(this.hue * 3, this.hue, this.hue+this.hue); //rojo - corales
+    } else if (this.modo === 0){
+      stroke(this.hue, this.hue,this.hue); // GRIS MUERTE
+    }
+
+    fill(0);
+    circle(this.x, this.y, this.r);
+    
+    //cambio color
+    this.hue++;
+    if(this.hue >= 85) {
+      this.hue = 50;
+    }
+
+    //cambio radio
+    this.r++;
+    if(this.r >= 25) {
+      this.r = 0;
+    }
+  }
+
+  step() {
+
+    let distanciaMouse = dist(this.x, this.y, mouseX, mouseY);
+    
+    if (distanciaMouse < 150 && (movedX !== 0 || movedY !== 0)) {
+      if (this.modo !== 0) {
+        this.modoOriginal = this.modo;
+        this.modo = 0;
+      }
+      this.tiempoCorrupcion = millis(); 
+    }
+    
+    if (this.modo === 1) this.posibilidad(); //verde
+    else if (this.modo === 3) this.tendencia(); //corales
+    else if (this.modo === 2) this.normalidad(); //azul
+    else if (this.modo === 4) this.excepcion(); //vida
+    else if (this.modo === 0) this.muerte();
+
+    /*
+    let distanciaMouse = dist(this.x, this.y, mouseX, mouseY);
+    
+    if (distanciaMouse < 300) {
+        this.x += (mouseX - this.x) * 0.15; 
+        this.y += (mouseY - this.y) * 0.15;
+      }
+    */
+
+    if(this.x > width) this.x = 0;
+    if(this.y > height) this.y = 0;
+    if(this.x < 0) this.x = width;
+    if(this.y < 0) this.y = height;
+  }
+
+  interactuar(otros) {
+    let radioPercepcion = 500;
+    let fuerza = 0.01;
+
+    for (let otro of otros) {
+      if (otro !== this) {
+        let d = dist(this.x, this.y, otro.x, otro.y);
+
+        if (d > 0 && d < radioPercepcion) {
+          let dx = otro.x - this.x;
+          let dy = otro.y - this.y;
+
+          if ((this.modo === 2 && otro.modo === 3) || (this.modo === 3 && otro.modo === 2)) {
+            this.x += dx * fuerza;
+            this.y += dy * fuerza;
+          }
+          else if ((this.modo === 3 && otro.modo === 1) || (this.modo === 1 && otro.modo === 3)) {
+            this.x -= dx * fuerza;
+            this.y -= dy * fuerza;
+          }
+          else if (this.modo === 1 && otro.modo === 4) {
+            this.x += dx * fuerza;
+            this.y += dy * fuerza
+          }
+          else if (this.modo === 4 && otro.modo === 1) {
+            this.x -= dx * fuerza;
+            this.y -= dy * fuerza
+          }
+        }
+      }
+    }
+  }
+
+  tendencia() {
+    //pasos "normales" - POSIBILIDAD
+    let choice = floor(random(8));
+
+    if (choice == 0) {
+      this.x+=15;
+    } else if (choice == 1) {
+      this.x-=15;
+    } else if (choice == 2) {
+      this.y+=15;
+    } else {
+      this.y-=15;
+    }
+  }
+  
+  normalidad() {
+    let perlinValue = noise(this.t);
+
+    //====== INCREMENTO VARIABLES=========
+    this.t += 0.01;
+    this.x += 15;
+    this.y = perlinValue * 1500;
+  }
+  
+  posibilidad() {
+    //pasos "normales" - POSIBILIDAD
+    let choice = floor(random(4));
+
+    if (choice == 0) {
+      this.x+=15;
+    } else if (choice == 1) {
+      this.x-=15;
+    } else if (choice == 2) {
+      this.y+=15;
+    } else {
+      this.y-=15;
+    }
+  }
+
+  excepcion() {
+    //implementación levy flight - EXCEPCIÓN
+    let r = random(1);
+    if (r < 0.02) {
+      let step = 300;
+      let stepx = random(-step, step);
+      let stepy = random(-step, step);
+      this.x += stepx;
+      this.y += stepy;
+    } else {
+      this.x += random(-10, 10);
+      this.y += random(-10, 10);
+    }
+  }
+
+  muerte()
+  {
+
+    this.x += random(-5, 5);
+    this.y += random(-5, 5);
+
+    if (millis() - this.tiempoCorrupcion > this.tiempoRecuperacion) {
+      this.modo = this.modoOriginal;
+      this.r = 5; 
+    }
+  }
+}
+
+function keyPressed() {
+  if (key === 'e') {
+    radii = 0;
+    eraseScreen = true;
+    walkers = [];
+  }
+    /*
+  else if(keyCode === 39) {
+    for (let w of walkers) {
+      w.modo++;
+      if (w.modo > 4) w.modo = 1;
+    }
+  }
+  else if(keyCode === 37) {
+    for (let w of walkers) {
+      w.modo--;
+      if (w.modo < 1) w.modo = 4;
+    }
+  }
+  */
+}
+
+function mousePressed() {
+  let nuevoWalker = new Walker(modo);
+  nuevoWalker.x = mouseX;
+  nuevoWalker.y = mouseY;
+  
+  walkers.push(nuevoWalker);
+  
+  modo++;
+  if (modo > 4) {
+    modo = 1;
+  }
+}
+```
+Ahora le pediré a una IA que ponga la palabra reservada donde necesita. Una vez hecho eso, ya funciona de maravilla, y ya puedo dibujar cosas SIN RASTRO, lo cual hubiese sido excelente para la parte de opacidad de las instrucciones... no lo había pensado. MI LOGICA SI ERA CORRECTA SOLO QUEAJ lfka kjhfk JHGFkj hgajkhfgaygfafhjbgaghjkghjkhjgakfhjgaghjksghjkagfhgkGKgkafgakghfghj VOY A CHILLAR.
+
+Ahora falta la parte importante de afectar probabilidades cuando EL USUARIO está presente, no me gusta lo que propuso la IA entonces voy a hacer un if que si mousex y mouse son 0 o están por fuera de la pantlla entonces no hace nada.
+
+
+
 
