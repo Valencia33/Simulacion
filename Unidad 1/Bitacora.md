@@ -617,8 +617,7 @@ no es tan simple. por alguna razón que desconozco mi lógica no funciona. Es mu
 
 Lo logré de una forma más elegante, utilicé un IF que encierra el bloque anterior, por lo que de esa forma, en el siguiente frame en el que opacity ya sea 0, no va a correr y va a dibujar encima del cuadrado negro.
 
-===================================================================================================================================
-===================================================================================================================================
+#### DESARROLLO CONCEPTO
 
 Hasta ahora he tenido en cuenta una forma muy básica de mi concepto. El punto actual del proyecto es centrarse más que todo en COMO CRECE LA NATURALEZA, más sin embargo está creciendo independiente de SI MISMA y la interacción humana afecta MÁS NO DESTRUYE y no vuelve a su orden, este es el estado actual del proyecto:
 
@@ -834,3 +833,45 @@ Es por eso, que a partir de ahora, tomaré una lista de ideas para implementar Q
 4.) Que la experiencia comience con una exploción.
 5.) Que cada uno de los colores esté asociado a un comportamiento y una parte de la naturaleza: Azul (agua, ruido perlin), Verde (Plantas, distribución no uniforme), Rojo (Corales, Distribución gaussiana (que crezcan hacía arriba y  tengan la habilidad de multiplicarse)), Amarillo (Vida, Levy Flight). La interacción del humano, me gustaría que hiciera las cosas grises.
 6.) Las relaciones entre los walker DEPENDE DE SUS TIPOS. CORALES Y AGUA SE ATRAEN, AGUA Y PLANTAS SE REPELEN, PLANTAS Y VIDA SE ATRAEN Y SE REPELEN.
+
+1.) Los walker se afectan entre ellos, como si fueran planetas.
+
+Lo primero que hice para esto fue hacer un repaso entero del código a ver que necesitaba cambios, en un principio la función mousePressed() reiniciaba modo en 0, ahora lo hace en 1 para que no entre al modo muerte por azar. Tambien eliminé la opción de cambiar de modo con las flechitas, pues ya no era necesario. Y AHORA LO QUE SIGUE ES DISEÑAR LA INTERACCIÓN ENTRE WALKERS. Para eso, crearé un nuevo método donde se calcula distancia y dependiendo del modo y la distancia actua de una manera.
+
+en un principio, es bastante fácil, solo hay que encontrar la distancia entre un walker y los demás, para eso utilizo un for y la función dist().
+
+```
+ for (let otro of otros) {
+      if (otro !== this) {
+        let d = dist(this.x, this.y, otro.x, otro.y);
+```
+
+una vez tengo la distancia tengo que hacer el SUPER IF para saber si es afectada o NO.
+
+EN ESTA PARTE USÉ IA, necesitaba una forma de aplicar una fuerza progresiva y no sabía como, la solución de la IA FUE LA SIGUIENTE
+
+```
+if (d > 0 && d < radioPercepcion) {
+          let dx = otro.x - this.x;
+          let dy = otro.y - this.y;
+
+          if ((this.modo === 2 && otro.modo === 3) || (this.modo === 3 && otro.modo === 2)) {
+            this.x += dx * fuerza;
+            this.y += dy * fuerza;
+          }
+          else if ((this.modo === 3 && otro.modo === 1) || (this.modo === 1 && otro.modo === 3)) {
+            this.x -= dx * fuerza;
+            this.y -= dy * fuerza;
+          }
+          else if (this.modo === 1 && otro.modo === 4) {
+            this.x += dx * fuerza;
+          }
+          else if (this.modo === 4 && otro.modo === 1) {
+            this.x -= dx * fuerza;
+          }
+        }
+```
+De esta forma ya los walker se afectan entre si.
+
+#### PAUSA DE ARREGLAR COSAS QUE ME MOLESTAN
+
