@@ -1300,3 +1300,18 @@ tendencia() {
 | **Interacción significativa:** la interacción modifica el comportamiento o las probabilidades del sistema, que también funciona sin intervención. | X | |[evidencia 4](#e4)|
 | **Prototipo funcional:** la experiencia puede ejecutarse y recorrerse completa sin errores que impidan comprenderla. | X | | [evidencia 5](https://editor.p5js.org/Valencia33/sketches/Q9D_vwB8Z)|
 | **Proceso documentado:** la bitácora evidencia avances, decisiones, dificultades, soluciones, uso de IA y enlace al prototipo. | X | | [evidencia 6](https://github.com/Valencia33/Simulacion/blob/main/Unidad%201/Bitacora.md)|
+
+### ENLACE PROTOTIPO
+
+[prototipo](https://editor.p5js.org/Valencia33/sketches/Q9D_vwB8Z)
+
+### CAPTURAS
+
+2 Minutos de ejecución:
+
+<img width="1080" height="1920" alt="image" src="https://github.com/user-attachments/assets/ccb039c3-18bf-4fd8-bbe7-afffdabb0662" />
+
+Interacción
+
+<img width="1080" height="1920" alt="image" src="https://github.com/user-attachments/assets/bc21c997-a7a8-44ed-8f5a-1d60c1626ee5" />
+
