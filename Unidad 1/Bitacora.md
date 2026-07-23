@@ -404,11 +404,18 @@ No debes ilustrar literalmente las frases. Debes traducirlas en comportamientos,
   - Formato 9:16, full screen y ejecución interactiva en tiempo real.
 
 ### Reto de diseño
-
+<a name="e1"></a>
 **CONCEPTO**
+
 Ultimamente, me preocupa mucho la dirección que tome la humanidad con respecto al medio ambiente, me parece que por muchos años hemos crecido sin preguntarnos como nuestros hábitos de consumo afectan el medio ambiente. La naturaleza, como un todo, es algo infinitamente complejo, con infinidad de variables, que sin la presencia de humanos se transforma y crece a partir de reglas impuestas desde un principio. Sin embargo, la presencia de la humanidad, ha desviado los procesos usuales de la naturaleza y la ha afectado de tal manera que volver a la normalidad tomará una escala de tiempo inconcebible para nosotros.
 
 Es por eso, que en mi experiencia pretendo darle importancia a ese concepto: Como la intervención humana afecta de forma indefinida un ecosistema.
+
+ - Posibilidad: El ecosistema CRECE de cualquier forma, depende de tantas variables que es casi imposible que salga igual 2 veces, REPRESENTA la forma en como la naturaleza evoluciona.
+ - Tendencia: LOS CORALES, es mucho más probable que crezan hacía arriba, intentado alcanzar el agua que es lo que les da vida
+ - Normalidad: LA INTERACCIÓN ENTRE AGUA Y TIERRA, se repelen y terminan creando una especie de armonia donde ignorar hace que creen un lugar con sentido
+ - Excepción: El comportamiento de la vida trata de imitar lo efimero que es, de tal forma que aparece y desaparece de todos lo lugares del canva, dejando una huella pequeña en un espacio más vasto
+ - Influencia: Como en la vida real, la presencia del ser humano hace que el ecosistema pierda el equilibrio, muera, sea afectado profundamente, tan profundamente que se demora mucho tiempo en recuperarse
 
 1.) Posibilidad
 
@@ -840,7 +847,7 @@ Lo primero que hice para esto fue hacer un repaso entero del código a ver que n
 
 en un principio, es bastante fácil, solo hay que encontrar la distancia entre un walker y los demás, para eso utilizo un for y la función dist().
 
-```
+```js
  for (let otro of otros) {
       if (otro !== this) {
         let d = dist(this.x, this.y, otro.x, otro.y);
@@ -850,7 +857,7 @@ una vez tengo la distancia tengo que hacer el SUPER IF para saber si es afectada
 
 EN ESTA PARTE USÉ IA, necesitaba una forma de aplicar una fuerza progresiva y no sabía como, la solución de la IA FUE LA SIGUIENTE
 
-```
+```js
 if (d > 0 && d < radioPercepcion) {
           let dx = otro.x - this.x;
           let dy = otro.y - this.y;
@@ -877,7 +884,7 @@ De esta forma ya los walker se afectan entre si. LA INTERACCIÓN ES MUY SIMPLE, 
 
 Este es bastante simple, es añadir otro estado para los walker, que se active SI ESTÁN DENTRO DEL RADIO DE ACCIÓN DEL MOUSE. entonces en el metodo step lo primero sería lo mismo, calcular la distancia y poner un if, despues poner que mode = 0 y en la parte donde se define su comportamiento por su modo añadir el método.
 
-```
+```js
 let distanciaMouse = dist(this.x, this.y, mouseX, mouseY);
     
     if (distanciaMouse < 150 && (movedX !== 0 || movedY !== 0)) {
@@ -890,7 +897,7 @@ let distanciaMouse = dist(this.x, this.y, mouseX, mouseY);
 ```
 Método muerte
 
-```
+```js
  muerte()
   {
 
@@ -908,7 +915,7 @@ Cuando el mouse interactua con alguno en ese radio entonces se muere y revive de
 
 buscnado he perdido mucho tiempo tratando de solucionar un problema y ya encontré algo interesante que no sabía que existia en p5js. Hay una función llamada createGraphics, que permite dibujar en un buffer distinto al que hemos estado utilizando hasta el momento. la solución que proponen es crear una especia de CAPA NUEVA con las misma resolución y dibujar en ella todo lo que necesito. ESTE ES UN CAMBIO GRANDE. entonces voy a guardar mi código acá, antes de hacer un daño.
 
-```
+```js
 let walkers = [];
 let radii = 0;
 let eraseScreen = false;
@@ -1195,6 +1202,97 @@ Ahora le pediré a una IA que ponga la palabra reservada donde necesita. Una vez
 
 Ahora falta la parte importante de afectar probabilidades cuando EL USUARIO está presente, no me gusta lo que propuso la IA entonces voy a hacer un if que si mousex y mouse son 0 o están por fuera de la pantlla entonces no hace nada.
 
+Para lograr eso lo que hice fue poner en cada uno de los comportamientos un if que solo deja pasar si el mouse está en la pantalla, a partir de esto, en cada uno de los comportamientos creé variables que son inicializadas con un valor pero si se cumple que el mouse está dentro de la pantalla entonces las cambia para que el movimiento sea más errático.
 
+```js
+tendencia() {
+    //pasos "normales" - POSIBILIDAD
+    let limite = 8;  
+    let paso = 15;   
 
+    if(mouseX != 0 && mouseX > 0 && mouseX < width && mouseY != 0 && mouseY > 0 && mouseY < height) {
+      limite = 5; 
+      paso = random(10, 30); 
+    }
+    
+    let choice = floor(random(limite));
 
+    if (choice == 0) {
+      this.x += paso;
+    } else if (choice == 1) {
+      this.x -= paso;
+    } else if (choice == 2) {
+      this.y += paso;
+    } else {
+      this.y -= paso;
+    }
+  }
+  
+  normalidad() {
+    let incrementoT = 0.01; 
+    let pasoX = 15;         
+
+    if(mouseX != 0 && mouseX > 0 && mouseX < width && mouseY != 0 && mouseY > 0 && mouseY < height) {
+      incrementoT = random(0.05, 0.15); 
+      pasoX = random(5, 25);            
+    }
+    
+    let perlinValue = noise(this.t);
+
+    //====== INCREMENTO VARIABLES=========
+    this.t += incrementoT;
+    this.x += pasoX;
+    this.y = perlinValue * 1500;
+  }
+  
+  posibilidad() {
+    //pasos "normales" - POSIBILIDAD
+    let paso = 15; 
+
+    if(mouseX != 0 && mouseX > 0 && mouseX < width && mouseY != 0 && mouseY > 0 && mouseY < height) {
+      paso = random(2, 45); 
+    }
+    
+    let choice = floor(random(4));
+
+    if (choice == 0) {
+      this.x += paso;
+    } else if (choice == 1) {
+      this.x -= paso;
+    } else if (choice == 2) {
+      this.y += paso;
+    } else {
+      this.y -= paso;
+    }
+  }
+
+  excepcion() {
+    //implementación levy flight - EXCEPCIÓN
+    let probabilidadSalto = 0.02; 
+    let ruidoBase = 10;           
+
+    if(mouseX != 0 && mouseX > 0 && mouseX < width && mouseY != 0 && mouseY > 0 && mouseY < height) {
+      probabilidadSalto = 0.15; 
+      ruidoBase = 30;           
+    }
+    
+    let r = random(1);
+    if (r < probabilidadSalto) {
+      let step = 300;
+      let stepx = random(-step, step);
+      let stepy = random(-step, step);
+      this.x += stepx;
+      this.y += stepy;
+    } else {
+      this.x += random(-ruidoBase, ruidoBase);
+      this.y += random(-ruidoBase, ruidoBase);
+    }
+  }
+```
+| Criterio | Cumplo | No cumplo | Evidencia |
+| :--- | :---: | :---: | :--- |
+| **Encargo completo:** interpreto los cinco momentos dentro de un mismo sistema visual. | X | | [evidencia 1](#e1)|
+| **Simulación con intención:** utilizo al menos tres conceptos de la unidad para comunicar las ideas del encargo. | X | | [evidencia 2](#e2)|
+| **Interacción significativa:** la interacción modifica el comportamiento o las probabilidades del sistema, que también funciona sin intervención. | X | |[evidencia 3](#e3)|
+| **Prototipo funcional:** la experiencia puede ejecutarse y recorrerse completa sin errores que impidan comprenderla. | X | | [evidencia 4](#e4)|
+| **Proceso documentado:** la bitácora evidencia avances, decisiones, dificultades, soluciones, uso de IA y enlace al prototipo. | X | | [evidencia 5](#e5)|
