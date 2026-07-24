@@ -1301,6 +1301,8 @@ tendencia() {
 | **Prototipo funcional:** la experiencia puede ejecutarse y recorrerse completa sin errores que impidan comprenderla. | X | | [evidencia 5](https://editor.p5js.org/Valencia33/sketches/Q9D_vwB8Z)|
 | **Proceso documentado:** la bitácora evidencia avances, decisiones, dificultades, soluciones, uso de IA y enlace al prototipo. | X | | [evidencia 6](https://github.com/Valencia33/Simulacion/blob/main/Unidad%201/Bitacora.md)|
 
+NOTA SEGÚN YO: 5.0
+
 ### ENLACE PROTOTIPO
 
 [prototipo](https://editor.p5js.org/Valencia33/sketches/Q9D_vwB8Z)
