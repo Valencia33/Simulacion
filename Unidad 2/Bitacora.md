@@ -10,6 +10,8 @@ En este primer acercamiento al particle life (del cual, previo a ver los videos,
 
 ## Actividad 2
 
+Comprendo que el movimiento predeterminado de una particula está dado por x(t), x'(t) = v(t) y x''(t) = a(t)
+
 ## Actividad 3
 
 ## Actividad 4
