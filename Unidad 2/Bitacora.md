@@ -449,12 +449,14 @@ function drawHUD() {
 
 - Autoevaluación sustentada y presentación oral.
 
-| Criterio | Peso | Valoración | Aporte (Sustento / Evidencias de bitácora) |
-| :--- | :--- | :--- | :--- |
-| La intención es clara y perceptible en el comportamiento. | 20% | 100% | La paradoja se evidencia: el núcleo permanece anclado y denso, mientras la corona oculta se mueve a velocidades extremas. Se percibe al instante mediante el uso del coronógrafo interactivo. |
-| Los tipos, cantidades, matriz y parámetros están justificados desde la intención. | 25% | 100% | Cada valor de fricción, asimetría, cantidad y velocidad fue diseñado estrictamente para simular presión térmica y comportamiento de gases reales, alejándose de decisiones puramente decorativas. |
-| Comprendo y puedo modificar el funcionamiento técnico del sistema. | 20% | 100% | Se demostró mediante la optimización algorítmica y el ajuste iterativo de fuerzas repulsivas para evitar el colapso estático del gas. |
-| El sistema produce variaciones con una identidad reconocible. | 15% | 100% | La inyección de azar paramétrico (`jitter`) asegura que el temperamento del astro varíe en cada clic, mientras que la matriz base garantiza que el sistema nunca deje de comportarse como una estrella. |
-| Experimenté, comparé, seleccioné y descarté con criterios claros. | 10% | 100% | El registro de pruebas documenta los descartes fundamentales (como el muro orbital rígido) al no alinearse con el criterio de "fluidez orgánica y turbulenta". |
-| Puedo distinguir y sustentar lo diseñado y lo emergente. | 10% | 100% | El diseño interviene en las reglas de fricción y en el diagrama relacional de las 4 entidades. Los remolinos convectivos, las trayectorias de las llamaradas y la forma final del viento solar son puramente emergentes. |
-| **Total** | **100%** | **100%** | |
+| Criterio | Peso (%) | Valoración (0-100) | Aporte (Val × Peso ÷ 100) | Sustento (Evidencias de bitácora) |
+| :--- | :---: | :---: | :---: | :--- |
+| **La intención es clara y perceptible en el comportamiento.** | 20% | 100 | **20.0** |
+| **Los tipos, cantidades, matriz y parámetros están justificados desde la intención.** | 25% | 100 | **25.0** |
+| **Comprendo y puedo modificar el funcionamiento técnico del sistema.** | 20% | 100 | **20.0** |
+| **El sistema produce variaciones con una identidad reconocible.** | 15% | 100 | **15.0** |
+| **Experimenté, comparé, seleccioné y descarté con criterios claros.** | 10% | 100 | **10.0** |
+| **Puedo distinguir y sustentar lo diseñado y lo emergente.** | 10% | 100 | **10.0** |
+| **TOTAL** | **100%** | | **100.0** | |
+
+NOTA: 5
