@@ -19,13 +19,36 @@ Observé los 3 videos y miré y analicé los dos ejecutables, sin embargo la que
 ## Actividad 4
 
 - Intención: ¿Qué transformación, sensación, tensión o idea debe experimentar quien observa?
+
+El equilibrio tan caótico que hay dentro de una estrella, el balance de fuerzas tan grandes que existen dentro de ella y la inmensidad de ese proceso, que es más de lo que ve.
+
 - Entidades: ¿Qué elementos existen? Partículas, especies, campos, fronteras, memorias o señales.
+
+Tengo planeado que existan 4 particulas, todas partes de la anatomía de una estrella las del núcleo de la estrella, la superficie de la esfera, la radiación que saca la esfera y la corona. 
+
 - Relaciones: ¿Cómo se afectan? Atracción, repulsión, persecución, cooperación, competencia o indiferencia.
+
+El sistema trata del equilibrio en las fuerzas y la persecusión, hay una atracción de todas las capas hacía el núcleo central y hay una repulsión entre la radiación y la superficie, simulando la fusión dentro de la estrella. Existe coperación entre la raciadión y el viento solar, lo que genera remolinos y corrientes
+
 - Entradas: ¿Qué alimenta el sistema? Semilla, tiempo, audio, interacción, datos o decisiones del participante.
+
+La semilla que inyecta el usuario y el uso del coronografo, pero el factor constante es el tiempo
+
 - Reglas: ¿Cómo cambia el estado de un frame al siguiente?
+
+en cada frame cada particula mira su radio, cada particula tiene un radio minimo y un radio max si esta debajo de la minima la repel y si esta dentro de la mazima hace la fuerza de atraccion o huida
+
 - Invariantes: ¿Qué debe permanecer para conservar la identidad del sistema?
+
+Las capas deben permanecer siempre intacatas, es decir las matricez de comportamiento de cada particula.
+
 - Variabilidad: ¿Qué puede ser diferente en cada ejecución sin destruir esa identidad?
+
+El temperamento de la estrella.
+
 - Curaduría y reflexión: ¿Qué resultado es significativo y cuál es solo un accidente interesante?
+
+Cuando suceden protuberancias/vientos solares 
 
 
 ## Actividad 5
