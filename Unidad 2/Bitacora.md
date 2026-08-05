@@ -100,6 +100,8 @@ Seleccioné las reglas matriciales como constantes, pero utilicé una función a
 
 Seleccioné mapear el color a la velocidad y diseñé un "coronógrafo" (mouse) negro para ocultar el centro porque quiero hacer perceptible la paradoja óptica astronómica (la corona es demasiado tenue para verse junto al brillo de la fotosfera). Espero que produzca una experiencia de descubrimiento donde el usuario revele la verdadera magnitud de la contradicción al interactuar.
 
+<a name="e1"></a>
+
 - Descarte 1: En las primeras pruebas, las reglas de asimetría pura provocaban que las partículas se unieran y salieran disparadas en línea recta hacia los bordes del lienzo.
 
 Ajuste: Se integró una atracción gravitacional constante y global de todas las capas exteriores hacia el núcleo (0.45). Esto obligó a las erupciones a curvarse y regresar, formando órbitas cerradas.
@@ -393,15 +395,47 @@ function drawHUD() {
 ```
 - Sistema generativo funcional.
 
-
+[EL CODIGO](#e2)
+[PROGRAMA](https://editor.p5js.org/Valencia33/sketches/9H1NBz1RJ)
 
 - Ficha breve con tensión e intención; tipos y cantidades; reglas; matriz; parámetros y justificación; invariantes y variables.
 
+  - Tipos y Cantidades: Se diseñaron 4 especies con roles termodinámicos específicos: Núcleo (Ancla), Fotosfera (Cuerpo denso), Radiación (Motor de Caos) y Viento Solar (Éter expansivo). La distribución (3% Núcleo vs. 50% Viento Solar) se calibró para hacer     perceptible la extrema densidad puntual del centro frente a la inmensidad vacía de la corona exterior.
+  - Reglas Relacionales (Matriz Base): El motor del movimiento es la persecución asimétrica. La Radiación busca desesperadamente al Plasma (0.95), pero el Plasma huye de la Radiación (-0.70). Esta "presión térmica" empuja la materia hacia el vacío. Para evitar el colapso de la corona, se implementó auto-repulsión térmica (-0.15).
 
+  const baseAttraction = [
+  [ 0.90,  0.60, -0.20,  0.00],   
+  [ 0.70,  0.25, -0.70,  0.10],   
+  [ 0.40,  0.95, -0.40,  0.20],   
+  [ 0.50, -0.40,  0.80, -0.15]    
+];
+
+  - Intensidad y Alcances (maxR): Se asignaron alcances visuales masivos (maxRMatrix > 1000) para la corona y la tracción al centro, asegurando que la gravedad central sea ineludible incluso a distancias extremas, obligando a las erupciones a curvarse y regresar en órbitas fluidas
+ 
+  const maxRMatrix = [
+  [ 700, 560,   0,    0],
+  [ 560, 150, 100,    0],
+  [1200, 200,  85,    0],
+  [1200, 300, 450,  200]  
+];
+
+  - Distancias de Interacción (minR): Al reducir los radios de repulsión (minRMatrix) entre las capas de gas (Fotosfera, Radiación), permitimos la convección y mezcla turbulenta de las erupciones antes de ser expulsadas, alejándonos de anillos rígidos o "muros" artificiales.
+ 
+  const minRMatrix = [
+  [ 15,  35,  10,  20],
+  [ 35,  20,  15,  30], 
+  [ 10,  15,  12,  15],
+  [ 20,  30,  15,  40]
+];
+
+  - Fricción y Velocidad: El núcleo (0) tiene alta fricción y baja velocidad (1.5) para vibrar internamente, mientras la Radiación y el Viento Solar tienen fricción nula y velocidad extrema (25) para simular luz y gas en el vacío. Esto ancla la estructura central mientras el exterior estalla vertiginosamente.
+  - Distribución Inicial (Invariante Espacial): Se sembró el núcleo estrictamente en el centro ($x=600, y=600$) para anclar la identidad espacial de la estrella desde el fotograma cero.
+  - Variabilidad (Jitter): En cada "Manifestación" (clic), la función jitter() altera levemente ($\pm 5\%$) los coeficientes de fricción, velocidad y peso de las fuerzas. El astro siempre es reconocible, pero su "temperamento" termodinámico (más violenta o más dócil) varía aleatoriamente.
+  - Apariencia e Interacción: El color y opacidad se mapean dinámicamente a la velocidad absoluta. El "Coronógrafo" (mouse) negro gigante es la interacción crítica; revela visualmente que la mayor cantidad de materia y energía del sistema (viento solar) estaba oculta por el brillo fotosférico central.
 
 - Registro de pruebas con ajustes, hallazgos y descartes.
 
-
+[Acá atrás hice el registro de los ajustes y descartes que realicé](#e1)
 
 - Varias manifestaciones del mismo sistema, producidas con distintas semillas o configuraciones permitidas.
 
