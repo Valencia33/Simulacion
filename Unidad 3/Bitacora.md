@@ -1,118 +1,35 @@
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~
-$ git clone https://github.com/Valencia33/Unidad-3-Simulacion.git
-Cloning into 'Unidad-3-Simulacion'...
-remote: Enumerating objects: 21, done.
-remote: Counting objects: 100% (21/21), done.
-remote: Compressing objects: 100% (17/17), done.
-remote: Total 21 (delta 0), reused 18 (delta 0), pack-reused 0 (from 0)
-Receiving objects: 100% (21/21), 17.79 KiB | 253.00 KiB/s, done.
+## Comandos git bash
 
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~
-$ pwd
-/c/Users/ESTUDIANTES
+$ git clone https://github.com/Valencia33/Unidad-3-Simulacion.git //CLONAR REPO
 
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~
-$ ls
- AppData/
-'Configuración local'@
- Contacts/
- Cookies@
-'Datos de programa'@
- Desktop/
- Documents/
- Downloads/
-'Entorno de red'@
- Favorites/
- Impresoras@
- Links/
-'Menú Inicio'@
-'Mis documentos'@
- Music/
- NTUSER.DAT
- NTUSER.DAT{5bdcaa3a-fe0b-11f0-89e0-208810e81f88}.TM.blf
- NTUSER.DAT{5bdcaa3a-fe0b-11f0-89e0-208810e81f88}.TMContainer00000000000000000001.regtrans-ms
- NTUSER.DAT{5bdcaa3a-fe0b-11f0-89e0-208810e81f88}.TMContainer00000000000000000002.regtrans-ms
- OneDrive/
- Pictures/
- Plantillas@
- Reciente@
-'Saved Games'/
- Searches/
- SendTo@
- Unidad-3-Simulacion/
- Videos/
- ntuser.dat.LOG1
- ntuser.dat.LOG2
- ntuser.ini
- simulacion/
- source/
- unidad3/
+$ ls //VER DONDE ESTOY
 
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~
-$ cd unidad
-Unidad-3-Simulacion/ unidad3/
+$ cd Unidad-3-Simulacion/ unidad3/ //CAMBIAR DIRECTORIO
 
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~
-$ cd unidad
-bash: cd: unidad: No such file or directory
+$ npm install //INSTALAR DEPENDENCIAS
 
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~
-$ cd Unidad-3-Simulacion
+$ npm run dev //ABRIR SERVER LOCAL
 
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~/Unidad-3-Simulacion (main)
-$ ls
-GUIA_ESTUDIANTE.md       README.md   package-lock.json  src/
-PRUEBAS_Y_DEPURACION.md  index.html  package.json       vite.config.js
+$ code . //ABRIR SCRIPTS
 
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~/Unidad-3-Simulacion (main)
-$ npm install
+## Actividad 2
 
-added 16 packages, and audited 17 packages in 8s
+1.) ¿Qué datos representan el estado de cada partícula y dónde viven?
 
-8 packages are looking for funding
-  run `npm fund` for details
+El estado de cada particula está representado por dos vectores, uno de velocidad y otro de posición, ambos tipos de datos viven en la GPU, mas especificamente viven en la VRAM.
 
-found 0 vulnerabilities
-npm notice
-npm notice New minor version of npm available! 11.6.2 -> 11.19.0
-npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.19.0
-npm notice To update run: npm install -g npm@11.19.0
-npm notice
+2.) ¿Qué fuerzas se suman y qué ecuación o dirección representa cada una?
 
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~/Unidad-3-Simulacion (main)
-$ npm run dev
+En mi implementación se aplican varias fuerzas eso depende de si la particula está en el circulo interno o externo, esas fuerzas son las siguientes: gravedad (Calcula un punto ideal en el radio del anillo y empuja la partícula hacia él), empuje radial (Un empuje que va desde el centro hasta las particulas para empujarlas hacia afuera), giro(una fuerza que se aplica de forma perpendicular al centro para que de la sensación de orbita), turbulencia (una capa de ruido con sen y cos en para crear ruido) y fricción, que se opone al movimiento neto para mantener bajo control el sistema.
 
-> forces-instrument-u3@1.0.0 dev
-> vite
+3.) ¿Cómo pasa una fuerza a aceleración, velocidad y posición?
 
+se usa euler semi implicito, lo que significa que de aceleración a velocidad se multiplica la fuerza total por dt y se le suma la velocidad actual y esa velocidad se limita para que no explote y todo salga volando. Y para velocidad a posición se agarra la nueva velocidad calculada y se multiplica por dt y se le suma la posición actual.
 
-  VITE v8.2.1  ready in 584 ms
+4.) ¿Cómo se dibuja el estado calculado sin volver a simularlo?
 
-  ➜  Local:   http://localhost:5173/
-  ➜  Network: use --host to expose
-  ➜  press h + enter to show help
-http://localhost:5173/
+la verdad ni idea,
 
-code *.sh *.py *.js
+5.) ¿Qué parámetros puede tocar el intérprete y por qué esos?
 
-
-
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~/Unidad-3-Simulacion (main)
-$ code .
-
-ESTUDIANTES@DESKTOP-N4RMBH7 MINGW64 ~/Unidad-3-Simulacion (main)
-$ npm run dev
-
-> forces-instrument-u3@1.0.0 dev
-> vite
-
-
-  VITE v8.2.1  ready in 132 ms
-
-  ➜  Local:   http://localhost:5173/
-  ➜  Network: use --host to expose
-  ➜  press h + enter to show help
-8:49:12 a. m. [vite] (client) page reload src/main.js
-8:50:02 a. m. [vite] (client) page reload src/main.js (x2)
-8:56:00 a. m. [vite] (client) page reload src/main.js (x3)
-
+El usuario puede tocar 3 tipos de parametros: fisicos, visuales y postprocesados, los fisicos se refierer a esos que aplican fuerzas directamente sobre las particulas, las visuales son puramente para cambiar de color las particulas y el postprocesado para jugar con los efectos de postprocesado que hay en el sistema.
