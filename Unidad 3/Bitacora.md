@@ -845,7 +845,7 @@ export function createLabPanel({ params, onReset, onPreset, onModeChange, onPaus
 | **Diseño de fuerzas e intención** | 20 | Las fuerzas y sus parámetros hacen perceptible una intención; el comportamiento surge de la dinámica y no de trayectorias previamente dibujadas. | 20 | [Enlace o descripción] |
 | **Instrumento, score e interpretación** | 15 | El score conecta la escucha con decisiones; escogí pocos controles expresivos y puedo conducir el sistema en vivo sin que el audio lo controle automáticamente. | 15 | [Enlace o descripción] |
 | **Experimentación y criterio frente a la IA** | 10 | Comparé alternativas, registré hallazgos y descartes, corregí propuestas de IA y puedo justificar por qué conservé la versión presentada. | 10 | [Enlace o descripción] |
-| **Entrega técnica y documentación** | 5 | La URL pública abre; la bitácora permite verificar el proceso. | 5 | [Enlace o URL] |
+| **Entrega técnica y documentación** | 5 | La URL pública abre; la bitácora permite verificar el proceso. | 5 | [URL](https://valencia33.github.io/UNIDAD3-SIMULACION/) |
 | **Total Puntos** | **100** | *Suma total de tu autoevaluación* | **[ 92/100 ]** | |
 
 NOTA: 4.6
