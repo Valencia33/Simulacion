@@ -51,8 +51,7 @@ X + C al tempo de la canción : hacen que un circulo no perfecto salte en el cen
 X + SHIFT intermitente que el tempo cambie: bola con imperfecciones
 C + SHIFT al tempo de la cancion: patrones cool con el ritmo
 
-- EMPEZAR CON Z Y SHIFT PRESIONADOS HASTA EL PRIMER TIRIN.
-- X + SHIFT INTERMITENTE
+<img width="900" height="1600" alt="WhatsApp Image 2026-08-20 at 22 13 11" src="https://github.com/user-attachments/assets/2d0fab3c-4a08-4264-b969-2fb46561579e" />
 
 ### MAPA DEL SISTEMA
 Estado: El estado de cada particula está representado por los vectores de velocidad y posición, igual que antes, esto vive en la GPU (VRAM) en dos buffers que están en src/simulation/createSimulation.js.
