@@ -54,8 +54,78 @@ C + SHIFT al tempo de la cancion: patrones cool con el ritmo
 - EMPEZAR CON Z Y SHIFT PRESIONADOS HASTA EL PRIMER TIRIN.
 - X + SHIFT INTERMITENTE
 
+### MAPA DEL SISTEMA
+Estado: El estado de cada particula está representado por los vectores de velocidad y posición, igual que antes, esto vive en la GPU (VRAM) en dos buffers que están en src/simulation/createSimulation.js.
 
-### FICHA DE FUERZAS Y REGISTRO PRUEBAS
+Fuerzas: Depende del grupo (graves o agudos) se aplican varias fuerzas: gravedad para mantener el anillo, el empuje radial del kick que las saca, el swirl para que orbiten y la turbulencia para el ruido. Todo esto está en el bloque force del compute en createSimulation.js.
+
+Integración: se usa euler semi implicito, lo que significa que la fuerza se multiplica por dt, se suma a la velocidad (se limita para que no explote) y luego eso a la posición. También está en createSimulation.js.
+
+Render: Se dibuja todo con Instancing y SpriteNodeMaterial en aditivo. El color muta solo leyendo la velocidad. Ya los efectos bacanos como el bloom exagerado, lente y el caleidoscopio viven en src/main.js.
+
+Controles: El usuario toca los sliders del panel para ajustar la base, el mouse para volver locos los agudos y las teclas (Z, X, C, V, Espacio y Shift) para aplicar efectos en vivo, la vuelta del teclado está en src/main.js.
+
+### FICHA DE FUERZAS (Desglose Completo)
+
+En mi sistema las partículas no se mueven por animaciones pre-hechas, sino por la suma de 5 fuerzas que pelean entre sí en cada frame. La ecuación principal de integración es: Vnueva = Vactual + Fneta * dt
+
+**1. Gravedad (Atracción al anillo)**
+*   **Qué hace:** Jala las partículas para que mantengan la forma del anillo en lugar de regarse por ahí.
+*   **Dirección:** Calcula la diferencia entre el punto ideal del anillo y dónde está la partícula actualmente.
+*   **Ecuación:** $F_{grave} = (R_{target} - P) \cdot G_{str}$
+*   **Parámetros:** `ringRadius` (radio ideal) y `gravityStrength` (fuerza de atracción).
+
+**2. Empuje Radial (El "Kick")**
+*   **Qué hace:** Es el latido del sistema, estalla las partículas hacia afuera cuando entra el bombo de la canción.
+*   **Dirección:** Desde el centro exacto de la pantalla $(0,0,0)$ hacia afuera.
+*   **Ecuación:** $F_{kick} = D_{current} \cdot K_{force}$
+*   **Parámetros:** `kickForce` (controlado por la barra Espaciadora).
+
+**3. Swirl (Giro / Órbita)**
+*   **Qué hace:** Evita que el anillo sea estático; obliga a las partículas a rotar constantemente formando un vórtice.
+*   **Dirección:** Es perpendicular a la posición desde el centro (usando un producto cruzado simplificado en 2D adaptado a 3D).
+*   **Ecuación:** $F_{swirl} = S_{dir} \cdot S_{str}$
+*   **Parámetros:** `swirlStrength` y `highsSwirl`.
+
+**4. Turbulencia (Ruido Fractal para Agudos)**
+*   **Qué hace:** Rompe la perfección geométrica metiendo caos, haciendo que las partículas azules se vuelvan locas.
+*   **Dirección:** Aleatoria, calculada cruzando ondas de senos y cosenos desfasadas por el tiempo.
+*   **Ecuación:** $F_{noise} = vec3(\sin(y), \cos(z), \sin(x)) \cdot H_{turb}$
+*   **Parámetros:** `highsTurbulence` (mapeado al eje Y del ratón).
+
+**5. Fricción (Damping)**
+*   **Qué hace:** Es el freno de mano. Sin esto, la inercia acumularía energía infinita y el sistema explotaría.
+*   **Dirección:** Siempre opuesta a la velocidad actual de la partícula.
+*   **Ecuación:** $F_{damping} = -V \cdot Damping$
+*   **Parámetros:** `damping`.
+
+**REGISTRO DE PRUEBAS**
+
+realicé 5 pruebas con el fin de comprobar que el sistema y ls funcionalidades que añadí tienen resultados predecibles, lo que confirma que efectivfamente están umplementadas de manera correcta.
+
+1.) la primera prueba consiste en poner todas las fuerzas que están en 0, esto con el fin de comprobar que las particulas no tengan movimientos extraños y fuera de lo común, comprobando de esa forma que su movimiento se debe puramente a las fuerzas que caen en ella.
+
+<img width="1121" height="951" alt="image" src="https://github.com/user-attachments/assets/0b804022-db4a-44fa-97b2-2d0b7ef9cc83" />
+
+sucede lo esperado, despues d eun timepo todas las particulas se quedan quietas, las azules permaneces en un anillo puesto que es algo que forcé adrede, si estaban muy cerca al centro las empuja y si estaban muy lejos las atrae, eso se define con un radio y como están en equilibrio ahí perfectamente se observa el circulo.
+
+2.) Este fue mera curiosidad pues es algo que por simple logica se que funciona, pero lo que hice fue volver la gravedad negativa, lo que provoca que ahora las cosas se distancien del centro.
+
+<img width="686" height="690" alt="image" src="https://github.com/user-attachments/assets/ce4eb50c-2efd-454b-a7d0-5a49467679fe" />
+
+3.) En esta prueba la idea era demostrar que mi sistema tenía un limite de velocidad, se logroó bajando el tiempo a la mitad y sumandole una cantidad exagerada a swirl, si no existiera un limite se dispararía al máximo.
+
+<img width="1215" height="901" alt="image" src="https://github.com/user-attachments/assets/0ce5f3f3-ed57-4bc5-a355-166bd4888c45" />
+
+4.) acá quiero ver que las fuerzas si estén afectando a quien DEBEN de afectar y a nadie más, entonces lo que hice fue quitarle las fuerzas al anillo morado y exagerar un poco el ruido del azul.
+
+<img width="786" height="757" alt="image" src="https://github.com/user-attachments/assets/ecdcacc3-7864-465c-8d7b-c41794d28c96" />
+
+pues las azules están locas, pero no distingo las moradas.
+
+5.) Quería ver el sistema sin fricción lo que se supone que lo haría totalmente caotico, que es lo qeu sucede, se medio observa un orden por lo que ya expliqué del radio de las azules pero realmente están disparandose, por eso el cuadrado que forman
+
+<img width="884" height="860" alt="image" src="https://github.com/user-attachments/assets/fb70b04c-9966-4186-949d-1682f1bf3967" />
 
 ### BITÁCORA IA
 
