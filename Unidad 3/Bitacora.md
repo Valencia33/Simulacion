@@ -199,7 +199,7 @@ Despues de la clase del miercoles sufrí terribles noticias:
 Jugar con la camara no me dió ningún resultado satisfactorio por lo que decidí dejar así.
 
 PARAMETERS
-```
+```js
 import * as THREE from 'three/webgpu';
 import { uniform } from 'three/tsl';
 
@@ -240,7 +240,7 @@ export function createParameters() {
 ```
 
 CREATESIMULATION
-```
+```js
 import * as THREE from 'three/webgpu';
 import {
   Fn,
@@ -409,7 +409,7 @@ export function createSimulation({ renderer, scene, params, count = 131072 }) {
 ```
 
 MAIN
-```
+```js
 import * as THREE from 'three/webgpu';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import WebGPU from 'three/addons/capabilities/WebGPU.js';
@@ -769,7 +769,7 @@ main().catch((error) => {
 ```
 
 LAB PANEL
-```
+```js
 function rangeRow(parent, label, object, key, min, max, step, onInput, getValue) {
   const wrap = document.createElement('div');
   wrap.className = 'row';
