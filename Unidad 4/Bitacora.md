@@ -37,3 +37,5 @@ Esto lo estoy logrando a partir de la formula que el profe mostró en clase y mu
 Tengo un indicador explicito, sin embargo estoy seguro de que si no existiera igual sería posible definir en que estado está la aplicación.
 
 **Puedo explicar claramente qué representa cada variable del modelo de Kuramoto en mi proyecto: 25 puntos.**
+
+Claro que si, el K en este proyecto será manejado desde un slider pero también desde el dibujo que voy a implementar con particulas. El N en este caso pues sería la cantidad de particulas por track, pues cada track por separado tiene un kuramoto.
