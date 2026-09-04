@@ -41,3 +41,5 @@ Tengo un indicador explicito, sin embargo estoy seguro de que si no existiera ig
 **Puedo explicar claramente qué representa cada variable del modelo de Kuramoto en mi proyecto: 25 puntos.**
 
 Claro que si, el K en este proyecto será manejado desde un slider pero también desde el dibujo que voy a implementar con particulas. El N en este caso pues sería la cantidad de particulas por track, pues cada track por separado tiene un kuramoto.
+
+NOTA: 4.5
