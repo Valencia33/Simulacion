@@ -18,4 +18,10 @@ esos son todos los controles, lo cual va a ser muy dificil de recordar y seguram
 
 eso más el filtro crt se debe ver como una locura va a ser increuible.
 
+YA LO HIZO Y QUEDó SUPER GENIAL
+
+<img width="1874" height="969" alt="image" src="https://github.com/user-attachments/assets/2b95d034-94ff-49a2-9b7c-9ece59d298d5" />
+
+Ahora, voy a añadir más patrones de texto, intentar que la parte de atrás sea más interesante y LISTOOOOOOOOO (mentiras, falta practicar)
+
 
