@@ -26,4 +26,4 @@ YA LO HIZO Y QUEDó SUPER GENIAL
 
 Ahora, voy a añadir más patrones de texto, intentar que la parte de atrás sea más interesante y LISTOOOOOOOOO (mentiras, falta practicar)
 
-
+### NOTA: 5
