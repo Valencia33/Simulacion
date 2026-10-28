@@ -47,3 +47,5 @@ La tesis de la charla está ahí metida: la confianza se teje primero en la dive
 También programé un panel de debug (se activa con la tecla D) que muestra en tiempo real cómo cambian los cinco parámetros físicos, los fps, y la cantidad de enlaces cruzados vs normales. Con eso puedo demostrar en vivo en la sustentación que lo que pasa en la pantalla es pura matemática y física, no una animación pregrabada.
 
 Y sobre la interacción con el mouse: no lo puse solo de adorno. Quería probar que el sistema está vivo. Un auditorio vacío no reacciona a nada, pero una comunidad sí. El mouse es un estímulo externo, y en vez de romperse o chocar, las partículas se acomodan y lo esquivan, sin soltar los resortes de confianza que las unen.
+
+nota:5
