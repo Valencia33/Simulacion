@@ -10,6 +10,10 @@ El proceso es lo que me hace feliz a mí, no lo voy a dejar de hacer, disfruto i
 
 Quiero detenerme un momento para responder la pregunta ¿Qué diferencia encuentras entre cumplir una tarea y explorar algo por curiosidad? La diferencia que encuentro es que una puede ser disfrutable y la otra siempre lo es, de alguna forma creo que en esa distinción radica mi relación con este curso, personalmente me gustaba mucho más cuando la metodología era como en computacionales o sist fisicos interactivos que eran cursos que premiaban la curiosidad y el equivocarse, recuerdo particularmente dos ejericicios: Cuando haciamos programas en "lenguaje de máquina" y cuando hicimos ese shader usando OpenGL, ambos me encantaron porque eran temas que me llamaban la atención, de los que no sabía nada y con los que me encarreté, cosa que realmente no me sucede con este curso, excepto con las unidad pasada pues en esa lo pude enlazar con un proyecto que ya había empezado y con el que estoy encarretado. Para mi esa es la diferencia, me gustaría que fuera algo que pudiera controlar pero tristemente hay veces que percibo las tareas como un obstaculo para hacer lo que realmente quiero.
 
+=========================================================================================================
+
+Despues de hablar con el profe pienso que valdría la pena hacer una obra que fuera más para mi, algo con lo que solo yo pueda conectar en cada nivel, pero cambié de opinión rápidamente porque la verdad siento que lo que tengo ya cumple, estoy supremamente satisfecho con el resultado 
+
 ## Diseño y Cultura
 
 Esta unidad la quiero usar también para otro de mis trabajos pues me parece que exploran ideas similares.
