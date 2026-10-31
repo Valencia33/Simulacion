@@ -1,4 +1,7 @@
+**Hola para ver la entrega final de Diseño y Cultura entra al link, también, al final de la bitacora está una pequeña explicación del porque hice lo que hice.**
+
 [link](https://valencia33.github.io/Unidad8/)
+
 
 ### UNIDAD 8
 
@@ -12,15 +15,8 @@ El proceso es lo que me hace feliz a mí, no lo voy a dejar de hacer, disfruto i
 
 Quiero detenerme un momento para responder la pregunta ¿Qué diferencia encuentras entre cumplir una tarea y explorar algo por curiosidad? La diferencia que encuentro es que una puede ser disfrutable y la otra siempre lo es, de alguna forma creo que en esa distinción radica mi relación con este curso, personalmente me gustaba mucho más cuando la metodología era como en computacionales o sist fisicos interactivos que eran cursos que premiaban la curiosidad y el equivocarse, recuerdo particularmente dos ejericicios: Cuando haciamos programas en "lenguaje de máquina" y cuando hicimos ese shader usando OpenGL, ambos me encantaron porque eran temas que me llamaban la atención, de los que no sabía nada y con los que me encarreté, cosa que realmente no me sucede con este curso, excepto con las unidad pasada pues en esa lo pude enlazar con un proyecto que ya había empezado y con el que estoy encarretado. Para mi esa es la diferencia, me gustaría que fuera algo que pudiera controlar pero tristemente hay veces que percibo las tareas como un obstaculo para hacer lo que realmente quiero.
 
-=========================================================================================================
-
-Despues de hablar con el profe pienso que valdría la pena hacer una obra que fuera más para mi, algo con lo que solo yo pueda conectar en cada nivel, pero cambié de opinión rápidamente porque la verdad siento que lo que tengo ya cumple, estoy supremamente satisfecho con el resultado 
-
 ## Diseño y Cultura
 
 Esta unidad la quiero usar también para otro de mis trabajos pues me parece que exploran ideas similares.
 
 Visité el oratorio de los Caballeros de la Virgen en El Retiro, mi experiencia en general ya está descrita en la crónica y en la ficha que realicé y despues de reflexionar sobre la experiencia decidí que quiero trabajar con el concepto que ellos tienen de belleza, con la importancia que ellos sienten por la estetica. Quiero explorar la idea de si algo que se ve hermoso realmente es hermoso incluso si no tiene "alma" cosa que me parece que es bastante importante analizar en tiempos de IA. Mi idea que tengo de Inteligencia Artificial es que algo que es netamente centrado en resultados, objetivamente un producto hecho con IA puede ser impecable, personalmente no he parado a observar muchas imagenes generadas por IA pero tengo la certeza de que en algún momento habré visto una y pensado que superficialmente era algo bonito, sin embargo al saber que algo es hecho con IA me deja de parecer bello, por lo que entiendo que mi definición de belleza es algo que si o si está enlazado con lo que lo precede. 
-
-Este semestre tuvimos esta clase llamada Simulación, en esta clase se esperaba que la conceptualización de las tareas fuera hecha por uno y la materialización del concepto fuera asistido con IA, al principio el curso me pareció excelente porque seguido de la tarea teniamos un examen escrito donde evaluaban los conceptos de la unidad, sin embargo a medida que el semestre avanza la metodología cambia y la mayoría del proceso fue delegado a la IA lo que provocó en mi desinteres frente a una de las clases que más me llamaba la atención. Esto cambió en las últimas dos unidades, en las cuales logré encontrar la forma de enlazar la entrega con proyectos que tenía o con temas que me interesaba tocar haciendo que el producto final de ambas unidades subiera de calidad en comparación a las pasadas.
-
